@@ -1,1 +1,17 @@
+import React, { useState } from 'react';
+import axios from 'axios';
 
+const NumberLst = () => {
+  const [nums, setNums] = useState([]);
+  const [error, setError] = useState(null);
+
+  const fetchNums = async () => {
+    try {
+      const response = await axios.get('http://localhost:8008/numbers');
+      setNums(response.data.nums);
+      setError(null);
+    } catch (error) {
+      setError('An error occurred while fetching the numbers.');
+      setNums([]);
+    }
+  };
